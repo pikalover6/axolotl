@@ -1,0 +1,38 @@
+base_model: openai-community/gpt2-xl  
+load_in_8bit: false  
+load_in_4bit: false  
+strict: true  
+
+datasets:
+  - path: totally-not-an-llm/alpacamix
+    type: alpaca
+
+dataset_prepared_path:
+val_set_size: 0.1  
+
+adapter: none  
+sequence_len: 512  
+gradient_accumulation_steps: 8  
+micro_batch_size: 4  
+num_epochs: 3  
+
+optimizer: adamw  
+learning_rate: 0.00005  
+lr_scheduler: linear  
+warmup_steps: 500  
+
+bf16: false  
+fp16: true  
+tf32: false  
+gradient_checkpointing: true  
+
+output_dir: ./fine_tuned_model  
+logging_steps: 100  
+saves_per_epoch: 1  
+evals_per_epoch: 1  
+
+deepspeed: null  
+
+special_tokens:
+  bos_token: "<|startoftext|>"
+  eos_token: "<|endoftext|>"
